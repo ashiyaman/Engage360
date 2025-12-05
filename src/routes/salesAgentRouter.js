@@ -5,10 +5,13 @@ const SalesAgent = require('../models/salesAgents')
 
 salesAgentRouter.get('/agents', async(req, res) => {
     try{
+        console.log("in sales agent router............")
         const agents = await SalesAgent.find()
+        console.log(agents)
         if(!agents){
             res.status(200).json({message: "No Agents found yet!!"})
         }
+        res.status(200).json({message: "Fetched agents successfully", data: agents})
     }
     catch(err){
         res.status(400).send('ERROR: ', err.message)
