@@ -19,7 +19,7 @@ const leadSchema = new mongoose.Schema({
     status: {
       type: String,
       required: true,
-      enum: ['New', 'Contacted', 'Qualified', 'Proposal Sent', 'Closed'],  // Predefined lead statuses
+      enum: ['New', 'Contacted', 'Qualified', 'Proposal Sent', 'Closed'],  // Predefined lead status
       default: 'New',
     },
     tags: {
