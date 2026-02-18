@@ -1,7 +1,7 @@
 const express = require('express')
 const leadRouter = express.Router()
 
-const Lead = require('../models/leads')
+const Lead = require('../models/Leads')
 // const fs = require("fs")
 
 // const leadJsonData = fs.readFileSync("./src/data/leads.json")

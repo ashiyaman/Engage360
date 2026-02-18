@@ -1,7 +1,7 @@
 const express = require('express')
 const salesAgentRouter = express.Router()
 
-const SalesAgent = require('../models/salesAgents')
+const SalesAgent = require('../models/SalesAgents')
 
 salesAgentRouter.get('/agents', async(req, res) => {
     try{
