@@ -24,14 +24,14 @@ const Lead = require('../models/Leads')
 //         }
 //     }
 //     catch(err){
-//         console.log("Unable to save data: ", err)
+//         .log("Unable to save data: ", err)
 //     }
 // }
 // seedLeadData()
 
 leadRouter.get('/leads', async(req, res) => {
     try{
-        const leads = await Lead.find()
+        const leads = await Lead.find().populate("salesAgent","name")
         res.status(200).json(leads)
     }
     catch(err){
@@ -42,7 +42,6 @@ leadRouter.get('/leads', async(req, res) => {
 
 leadRouter.post('/leads', async(req, res) => {
     try{
-        console.log(req.body)
         const {name, source, salesAgent, status, tags, timeToClose, priority} = req.body
         const addlead = new Lead({name, source, salesAgent, status, tags, timeToClose, priority})
         const lead = await addlead.save()
@@ -72,7 +71,6 @@ leadRouter.put("/leads/edit/:leadId", async(req, res) => {
 leadRouter.get("/leads/allStatus", async(req, res) => {
     try{
         const statuses = await Lead.distinct("status")
-        console.log(statuses)
         if(!statuses){
              res.status(400).send('ERROR: ', err.message)
         }
