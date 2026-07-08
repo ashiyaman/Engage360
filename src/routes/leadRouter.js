@@ -57,7 +57,7 @@ leadRouter.post('/leads', async(req, res) => {
 
 leadRouter.put("/leads/edit/:leadId", async(req, res) => {
     try{
-        const updatedLead = await Lead.findByIdAndUpdate(req.params.leadId, {status: req.body.status}, {new: true})
+        const updatedLead = await Lead.findByIdAndUpdate(req.params.leadId, req.body, {new: true})
         if(!updatedLead){
             res.status(400).send('ERROR: ', err.message)
         }
@@ -77,6 +77,35 @@ leadRouter.get("/leads/allStatus", async(req, res) => {
         res.status(200).json(statuses)
     }
      catch(err){
+        res.status(400).send('ERROR: ', err.message)
+    }
+})
+
+leadRouter.patch("/leads/edit/status/:leadId", async(req, res) => {
+    try{
+        console.log("in patch")
+        console.log(req.body)
+        const updatedLead = await Lead.findByIdAndUpdate(req.params.leadId, {status: req.body.status}, {new:true})
+        if(!updatedLead){
+            res.status(400).send('ERROR: ', err.message)
+        }
+        res.status(200).json(updatedLead)
+
+    }
+    catch(err){
+        res.status(400).send('ERROR: ', err.message)
+    }
+})
+
+leadRouter.delete("/lead/:leadId", async(req, res) => {
+     try{
+        const deletedLead = await Lead.findByIdAndDelete(req.params.leadId)
+        if(!deletedLead){
+            res.status(400).send('ERROR: ', err.message)
+        }
+        res.status(200).json(deletedLead)
+    }
+    catch(err){
         res.status(400).send('ERROR: ', err.message)
     }
 })

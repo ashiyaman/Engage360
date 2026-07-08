@@ -6,7 +6,7 @@ const SalesAgent = require('../models/SalesAgents')
 salesAgentRouter.get('/agents', async(req, res) => {
     try{
         const agents = await SalesAgent.find()
-    
+
         if(!agents){
             res.status(200).json({message: "No Agents found yet!!"})
         }
@@ -38,5 +38,31 @@ salesAgentRouter.post('/agents', async(req, res) => {
         res.status(400).send('ERROR: ', err.message)
     }
 }) 
+
+salesAgentRouter.put('/agents/edit/:agentId', async(req, res) => {
+    try{
+        const updatedAgent = await SalesAgent.findByIdAndUpdate(req.params.agentId, req.body, {new: true})
+         if(!updatedAgent){
+            res.status(200).json({message: "No Agents found!!"})
+        }
+        res.status(200).json({message: "Updated agent successfully", data: updatedAgent})
+    }
+    catch(err){
+        res.status(400).send('ERROR: ', err.message)
+    }
+})
+
+salesAgentRouter.delete("/agent/:agentId", async(req, res) => {
+     try{
+        const deletedAgent = await SalesAgent.findByIdAndDelete(req.params.agentId)
+        if(!deletedAgent){
+            res.status(400).send('ERROR: ', err.message)
+        }
+        res.status(200).json(deletedAgent)
+    }
+    catch(err){
+        res.status(400).send('ERROR: ', err.message)
+    }
+})
 
 module.exports = {salesAgentRouter}
