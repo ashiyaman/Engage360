@@ -32,4 +32,4 @@ app.get('/', (req, res) => {
 //         console.log('Error while connecting to DB, ', err)
 //     })
 
-module.exports = {app}
+module.exports = app
