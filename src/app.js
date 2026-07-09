@@ -22,14 +22,14 @@ app.get('/', (req, res) => {
     res.status(200).send('Welcome to Engage360 Server, The 360° Lead Experience')
 })
 
-// connectDB()
-//     .then(() => {
-//         app.listen(process.env.PORT, () => {
-//             console.log('Server is listening on port 3000')
-//         })
-//     })
-//     .catch((err) => {
-//         console.log('Error while connecting to DB, ', err)
-//     })
+connectDB()
+    .then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log('Server is listening on port 3000')
+        })
+    })
+    .catch((err) => {
+        console.log('Error while connecting to DB, ', err)
+    })
 
 module.exports = app
