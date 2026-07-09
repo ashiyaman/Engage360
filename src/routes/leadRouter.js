@@ -35,7 +35,9 @@ leadRouter.get('/leads', async(req, res) => {
         res.status(200).json(leads)
     }
     catch(err){
-        res.status(400).send('ERROR: ', err.message)
+        console.error(err);
+        res.status(500).json({ error: err.message });
+
     }
 
 })
