@@ -60,6 +60,7 @@ leadRouter.post('/leads', async(req, res) => {
 leadRouter.put("/leads/edit/:leadId", async(req, res) => {
     try{
         const updatedLead = await Lead.findByIdAndUpdate(req.params.leadId, req.body, {new: true})
+                                      .populate("salesAgent", "name")
         if(!updatedLead){
             res.status(400).send('ERROR: ', err.message)
         }
