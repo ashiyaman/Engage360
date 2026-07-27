@@ -4,6 +4,7 @@ const cors = require('cors')
 const { leadRouter } = require('./routes/leadRouter')
 const { salesAgentRouter } = require('./routes/salesAgentRouter')
 const { commentRouter } = require('./routes/commentRouter')
+const { aiRouter } = require('./routes/aiRouter')
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(express.json())
 app.use('/', leadRouter)
 app.use('/', salesAgentRouter)
 app.use('/', commentRouter)
+app.use('/', aiRouter)
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to Engage360 Server, The 360° Lead Experience')
 })
