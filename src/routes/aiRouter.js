@@ -65,9 +65,12 @@ Return ONLY valid JSON in this format:
 
     console.log(response.choices[0].message.content);
 
-    const text = response.choices[0].message.content;
+    const text = JSON.parse(response.choices[0].message.content)
 
-    res.json(text);
+    if(!text){
+            res.status(404).json({message: 'Unable to get AI summary'})
+        }
+        res.status(200).json({message: 'AI summary fetched successfully', data: text})
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err.message });
